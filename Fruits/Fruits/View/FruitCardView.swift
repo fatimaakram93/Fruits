@@ -9,23 +9,26 @@ import SwiftUI
 
 struct FruitCardView: View {
     // MARK: - Properties
+
+    var fruit: Fruit
+
     @State private var isAnimated: Bool = false
 
     // MARK: - Body
     var body: some View {
         ZStack {
             VStack(spacing: 20) {
-                Image("blueberry")
+                Image(fruit.image)
                     .resizable()
                     .scaledToFit()
                     .scaleEffect(isAnimated ? 1.0 : 0.6)
 
-                Text("Blueberry")
+                Text(fruit.title)
                     .foregroundColor(.white)
                     .font(.largeTitle)
                     .fontWeight(.bold)
 
-                Text("Blueberries are widely populra, yummy, nutritious and cutu babies in  the world i ")
+                Text(fruit.headline)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
@@ -39,7 +42,7 @@ struct FruitCardView: View {
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center )
-        .background(LinearGradient(gradient: Gradient(colors: [Color("ColorBlueBerryLight"), Color("ColorBlueberryDark")]), startPoint: .top, endPoint: .bottom))
+        .background(LinearGradient(gradient: Gradient(colors: fruit.gradientColors), startPoint: .top, endPoint: .bottom))
         .cornerRadius(20)
         .padding(.horizontal, 20)
     }
@@ -49,6 +52,6 @@ struct FruitCardView: View {
 
 struct FruitCardView_Previews: PreviewProvider {
     static var previews: some View {
-        FruitCardView()
+        FruitCardView(fruit: fruitsData[1])
     }
 }
