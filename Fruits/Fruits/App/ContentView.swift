@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
 
     var fruits: [Fruit] = fruitsData
+    @State private var isSHowingSettings: Bool = false
 
     var body: some View {
         NavigationView {
@@ -23,6 +24,17 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Fruits")
+            .navigationBarItems(
+                trailing:
+                    Button(action: {
+                        isSHowingSettings = true
+                    }) {
+                        Image(systemName: "slider.horizontal.3")
+                    }
+                    .sheet(isPresented: $isSHowingSettings) {
+                        SettingsView()
+                    }
+                )
         }
 
     }
